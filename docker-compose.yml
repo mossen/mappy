@@ -1,0 +1,15 @@
+version: '3.3'
+
+services:
+  www: &web_node
+    build: ./docker
+    command: sh /var/www/html/docker/entrypoint.sh
+    environment: 
+      - INIT=${INIT:-0}
+      - JSESS=${JSESS:-0}
+    expose:
+      - 8080
+    ports:
+      - 3030:8080
+    volumes:
+      - .:/var/www/html/
