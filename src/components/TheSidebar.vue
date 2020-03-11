@@ -1,14 +1,12 @@
 <template>
   <transition name="fade">
     <b-nav vertical class="col-3 bg-dark">
-      <b-nav-item active>Active</b-nav-item>
-      <b-nav-item>Link</b-nav-item>
-      <b-nav-item>Another Link</b-nav-item>
-      <b-nav-item disabled>Disabled</b-nav-item>
+      <TheAutoComplete />
 
-      <b-list-group-item>
+      <b-nav-item>
         <router-link to="/">Home</router-link>
-      </b-list-group-item>
+      </b-nav-item>
+
       <b-list-group-item>
         <router-link to="/about">About</router-link>
       </b-list-group-item>
@@ -17,7 +15,18 @@
 </template>
 
 <script>
+import TheAutoComplete from "@/components/TheAutoComplete";
+
 export default {
-  name: "TheSidebar"
+  name: "TheSidebar",
+  components: {
+    TheAutoComplete
+  }
 };
 </script>
+
+<style lang="scss" scoped>
+.nav {
+  padding: 0.5rem;
+}
+</style>
