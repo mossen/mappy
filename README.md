@@ -38,6 +38,7 @@ These instructions will get you a copy of the project up and running on your loc
     INIT=1 docker-compose up
     ```
   ```INIT=1``` is needed for the first time to install everything needed.
+  Use ```docker-compose exec www bash``` to ssh into the container.
 
 * Local
     ```
