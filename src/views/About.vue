@@ -1,5 +1,3 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <iframe src="/resume.html" width="100%" height="100%"> </iframe>
 </template>

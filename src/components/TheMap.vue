@@ -7,17 +7,20 @@ import MapBoxgl from "mapbox-gl";
 
 export default {
   name: "TheMap",
-  props: {
-    geoJson: { default: null, type: Object }
-  },
+  props: { features: { default: null, type: Array } },
   computed: {
     center: function() {
-      // Set the first coordinate as center
-      if (this.geoJson) {
-        return this.geoJson.features[0].geometry.coordinates;
+      // Set the first feature's coordinate as center
+      if (this.features) {
+        return this.features[0].geometry.coordinates;
       }
-      console.log(this.geoJson);
+
       return [0, 0];
+    }
+  },
+  watch: {
+    features: function() {
+      this.setMap();
     }
   },
   mounted() {
@@ -26,7 +29,7 @@ export default {
   methods: {
     initiateMap() {
       MapBoxgl.accessToken = process.env.VUE_APP_MAPBOX_TOKEN;
-      const map = new MapBoxgl.Map({
+      this.map = new MapBoxgl.Map({
         container: "map",
         style: "mapbox://styles/mapbox/streets-v11",
         center: this.center,
@@ -35,12 +38,15 @@ export default {
 
       const geoJson = {
         type: "geojson",
-        data: this.geoJson
+        data: {
+          type: "FeatureCollection",
+          features: this.features
+        }
       };
 
-      map.on("load", function() {
-        map.addSource("points", geoJson);
-        map.addLayer({
+      this.map.on("load", () => {
+        this.map.addSource("points", geoJson);
+        this.map.addLayer({
           id: "layer-id",
           type: "circle",
           source: "points",
@@ -52,8 +58,8 @@ export default {
         });
       });
 
-      map.on("click", function(e) {
-        const features = map.queryRenderedFeatures(e.point, {
+      this.map.on("click", event => {
+        const features = this.map.queryRenderedFeatures(event.point, {
           layers: ["layer-id"]
         });
 
@@ -67,9 +73,16 @@ export default {
 
         new MapBoxgl.Popup({ offset: [0, 0] })
           .setLngLat(feature.geometry.coordinates)
-          .setHTML(`<h3>${project.Title}</h3><p>${project.Description}</p>`)
-          .addTo(map);
+          .setHTML(
+            `<p class="font-weight-bold">${project.Title}</p><p>${project.Description}</p>`
+          )
+          .addTo(this.map);
       });
+    },
+    setMap() {
+      this.map
+        .getSource("points")
+        .setData({ type: "FeatureCollection", features: this.features });
     }
   }
 };

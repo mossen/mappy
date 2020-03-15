@@ -1,32 +1,38 @@
 <template>
   <transition name="fade">
     <b-nav vertical class="col-3 bg-dark">
-      <TheAutoComplete :options="options" label="Search for a location" />
-
-      <b-nav-item>
+      <b-list-group-item class="d-flex justify-content-between">
         <router-link to="/">Home</router-link>
-      </b-nav-item>
-
-      <b-list-group-item>
         <router-link to="/about">About</router-link>
       </b-list-group-item>
+
+      <br />
+
+      <div v-if="$route.path === '/'">
+        <TheSlider label="Set value" commitName="setValue" />
+
+        <TheSearchBox
+          :options="$store.state.features"
+          label="Search an address"
+          commitName="setKeyword"
+        />
+      </div>
     </b-nav>
   </transition>
 </template>
 
 <script>
-import TheAutoComplete from "@/components/TheAutoComplete";
-import GEO_JSON from "@/data/GeoJson";
+import TheSlider from "@/components/TheSlider";
+import TheSearchBox from "@/components/TheSearchBox";
 
 export default {
   name: "TheSidebar",
   components: {
-    TheAutoComplete
+    TheSearchBox,
+    TheSlider
   },
-  data() {
-    return {
-      options: GEO_JSON.features
-    };
+  mounted() {
+    console.log(this.$route);
   }
 };
 </script>
