@@ -13,6 +13,5 @@ then
 fi
 
 
-tail -f /dev/null  
 echo "serving..."
-# yarn serve
+yarn serve

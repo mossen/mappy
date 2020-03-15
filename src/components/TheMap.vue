@@ -11,7 +11,7 @@ export default {
   computed: {
     center: function() {
       // Set the first feature's coordinate as center
-      if (this.features) {
+      if (this.features && this.features.length) {
         return this.features[0].geometry.coordinates;
       }
 

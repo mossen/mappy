@@ -15,7 +15,7 @@ export default {
     VueSlider
   },
   props: {
-    label: { default: null, type: [Node, String] },
+    label: { default: null, type: String },
     options: {
       default: () => ({
         min: 0,
@@ -24,7 +24,7 @@ export default {
       type: Object
     },
     initialValue: {
-      default: () => 9999999,
+      default: 9999999,
       type: Number
     },
     commitName: { default: null, type: String },
