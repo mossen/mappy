@@ -30,9 +30,6 @@ export default {
   components: {
     TheSearchBox,
     TheSlider
-  },
-  mounted() {
-    console.log(this.$route);
   }
 };
 </script>
