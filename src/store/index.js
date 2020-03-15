@@ -23,24 +23,21 @@ export default new Vuex.Store({
             state.keyword,
             `<span class="font-weight-bold">${state.keyword}</span>`
           );
-          if (boldedText !== item.properties.project.Address) {
-            if (
-              parseInt(item.properties.project.Value.replace(".", "")) <=
-              state.value
-            ) {
-              // Preventing mutation
-              const newItem = JSON.parse(JSON.stringify(item));
-              newItem.properties.project.BoldedText = boldedText;
-              accumulator.push(newItem);
-            }
-          }
-        } else {
           if (
+            boldedText !== item.properties.project.Address &&
             parseInt(item.properties.project.Value.replace(".", "")) <=
-            state.value
+              state.value
           ) {
-            accumulator.push(item);
+            // Preventing mutation
+            const newItem = JSON.parse(JSON.stringify(item));
+            newItem.properties.project.BoldedText = boldedText;
+            accumulator.push(newItem);
           }
+        } else if (
+          parseInt(item.properties.project.Value.replace(".", "")) <=
+          state.value
+        ) {
+          accumulator.push(item);
         }
 
         return accumulator;
@@ -52,11 +49,5 @@ export default new Vuex.Store({
     setValue(state, value) {
       state.value = value;
     }
-  },
-  actions: {
-    filter({ commit }, payload) {
-      commit("handleFilter", payload);
-    }
-  },
-  modules: {}
+  }
 });

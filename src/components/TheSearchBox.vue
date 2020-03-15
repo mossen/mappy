@@ -41,7 +41,7 @@ export default {
   name: "TheSearchBox",
   props: {
     placeholder: { default: null, type: String },
-    label: { default: null, type: [Node, String] },
+    label: { default: null, type: String },
     options: { default: null, type: [Object, Array] },
     commitName: { default: null, type: String }
   },
