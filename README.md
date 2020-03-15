@@ -1,6 +1,7 @@
 # Archistar Front-End Quiz
 
-This is a test that I have done for a front-end role. You can find the quiz in [here](./Quiz.md)
+This is a test that I have done for a front-end role. You can find the quiz in [here](https://github.com/mossen/archistar/blob/master/Quize.md)
+Demo at [https://mossen-archistar.netlify.com/](https://mossen-archistar.netlify.com/)
 
 ## Solution architecture
 
@@ -50,14 +51,8 @@ These instructions will get you a copy of the project up and running on your loc
     ```
 
 ## Running the tests
-<!-- @todo -->
 ```
 yarn test:unit
-```
-
-### Run end-to-end tests
-```
-yarn test:e2e
 ```
 
 ### Lints and fixes files
@@ -66,7 +61,7 @@ yarn lint
 ```
 
 ## Deployment
-<!-- @todo -->
+* [Netlify](https://www.netlify.com/)
 
 ## Built With
 
